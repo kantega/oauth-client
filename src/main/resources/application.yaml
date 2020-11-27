@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          vipps-login:
+            provider: vipps-login
+            client-name: 'Vipps'
+            client-id: ${VIPPS_CLIENT_ID}
+            client-secret: ${VIPPS_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/api/callback' # defaults to '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - name
+              - birthDate
+              - email
+              - phoneNumber
+              - address
+              - api_version_2
+        provider:
+          vipps-login:
+            user-info-authentication-method: 'header'
+            # issuer-uri: 'https://apitest.vipps.no/access-management-1.0/access/' # Test
+            issuer-uri: 'https://api.vipps.no/access-management-1.0/access/' # Production
